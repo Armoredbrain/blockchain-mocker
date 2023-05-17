@@ -79,10 +79,10 @@ let blockchain = new Blockchain(genesisBlock);
 function getBlockchain() {
     for (let i = 0; i < 10; i++) {
         console.log("--------------------------------------------------------");
-        console.log("+++++++++++++++++++ LAST BLOCK HASH ++++++++++++++++++++");
+        console.log("+++++++++++++++++++ PREVIOUS BLOCK HASH ++++++++++++++++");
         console.log(blockchain.getLastBlock().getHash());
         blockchain.mineNewBlock(genTransactions());
-        console.log("+++++++++++++++++++ NEW LAST BLOCK +++++++++++++++++++++");
+        console.log("+++++++++++++++++++ NEW BLOCK ++++++++++++++++++++++++++");
         console.log(blockchain.getPreviousBlockFrom(blockchain.getLastBlock()));
         console.log("--------------------------------------------------------");
     }
