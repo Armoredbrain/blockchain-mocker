@@ -1,9 +1,5 @@
 import crypto from "crypto-js";
 
-function toHex(value: number) {
-    return value.toString(16);
-}
-
 class Block {
     transactions: string[];
     nonce: number;
@@ -30,8 +26,8 @@ class Block {
                 "01000000" +
                     this.previousBlockHash +
                     this.getMerkle() +
-                    toHex(this.timestamp) +
-                    toHex(this.nonce)
+                    this.timestamp.toString(16) +
+                    this.nonce.toString(16)
             )
             .toString();
     }
@@ -82,18 +78,16 @@ let blockchain = new Blockchain(genesisBlock);
 
 function getBlockchain() {
     for (let i = 0; i < 10; i++) {
-        console.log(
-            "-------------------------------------------------------------------"
-        );
-        console.log("current hash ---> ", blockchain.getLastBlock().getHash());
+        console.log("--------------------------------------------------------");
+        console.log("+++++++++++++++++++ LAST BLOCK HASH ++++++++++++++++++++");
+        console.log(blockchain.getLastBlock().getHash());
         blockchain.mineNewBlock(genTransactions());
+        console.log("+++++++++++++++++++ NEW LAST BLOCK +++++++++++++++++++++");
         console.log(blockchain.getPreviousBlockFrom(blockchain.getLastBlock()));
-        console.log(
-            "-------------------------------------------------------------------"
-        );
+        console.log("--------------------------------------------------------");
     }
 }
 
-console.log("ENTER");
+console.log("--ENTER-------------------------------------------------");
 getBlockchain();
-console.log("EXIT");
+console.log("--EXIT--------------------------------------------------");
